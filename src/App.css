@@ -20,3 +20,37 @@
 .App-link {
   color: #09d3ac;
 }
+
+.table-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 700px;
+  overflow-y: scroll;;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 30%;
+}
+
+caption {
+  width: 100%;
+  font-size: 30px;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+tr:last-child {
+  font-size: 30px;
+  font-weight: bold;
+}
