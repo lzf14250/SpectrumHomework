@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 
-function Record(props) {
-    var day = 0;
-    var totalBonus = 0;
+class Record extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            totalBonus: 10
+        };
+        this.calBonus = this.calBonus.bind(this);
+    }
 
-    function calBonus(pay) {
+    calBonus(pay) {
         if (pay >= 100) {
             return (pay-100)*2 + 50;
         }
@@ -14,28 +19,33 @@ function Record(props) {
         else return 0;
     }
 
-    return (
-        <table>
-            <caption>{props.caption}</caption>
-            <tr>
-                <th>Day of Month</th>
-                <th>Payment Amount</th>
-                <th>Bonus</th>
-            </tr>
-            {props.records.map(pay => {
-                var bonus = calBonus(pay);
-                totalBonus += bonus;
-                return(
-                    <tr>
-                        <td>{++day}</td>
-                        <td>{pay}</td>
-                        <td>{bonus}</td>
-                    </tr>
-                );
-            })}
-            <tr><td>Total Bonus: {totalBonus}</td></tr>
-        </table>
-    );
+    render() {
+        var day = 0;
+        var totalBonus = 0;
+        var bonusArr = this.props.records.map(pay => {
+            var bonus = this.calBonus(pay);
+            totalBonus += bonus;
+            return(
+                <tr>
+                    <td>{++day}</td>
+                    <td>{pay}</td>
+                    <td>{bonus}</td>
+                </tr>
+            );
+        });
+        return (
+            <table>
+                <caption>{this.props.caption}</caption>
+                <tr>
+                    <th>Day of Month</th>
+                    <th>Payment Amount</th>
+                    <th>Bonus</th>
+                </tr>
+                {bonusArr}
+                <tr><td>Total Bonus: {totalBonus}</td></tr>
+            </table>
+        );
+    }
 }
 
 export default Record;
